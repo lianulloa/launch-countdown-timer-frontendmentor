@@ -1,14 +1,23 @@
 <template>
-  <div class="tick-card">
-    <div class="tick-card-top">41</div>
-    <div class="tick-card-bottom">
-      <div class="tick-card-bottom-back" />
+  <div
+    :class="['tick-card', { flip }]"
+    :data-current-count="twoDigits(currentCount)"
+  >
+    <div class="tick-card-top">{{ twoDigits(previousCount) }}</div>
+    <div class="tick-card-bottom" :data-current-count="twoDigits(currentCount)">
+      <div
+        class="tick-card-bottom-back"
+        :data-previous-count="twoDigits(previousCount)"
+      />
     </div>
-    {{ label }}
+    <small class="text-spaced" style="font-size: 1rem">
+      {{ caption }}
+    </small>
   </div>
 </template>
 
 <script>
+import { ref, toRef, watch } from "vue";
 export default {
   name: "TickCard",
   props: {
@@ -16,11 +25,46 @@ export default {
       type: String,
       required: true,
     },
+    count: {
+      type: [String, Number],
+      required: true,
+    },
+  },
+  setup(props) {
+    const previousCount = ref(props.count);
+    const currentCount = ref(props.count);
+    const flip = ref(false);
+
+    const count = toRef(props, "count");
+
+    const twoDigits = (v) => ("0" + v).slice(-2);
+
+    watch(count, (newValue, oldValue) => {
+      previousCount.value = oldValue;
+      currentCount.value = newValue;
+      flip.value = true;
+
+      setTimeout(() => {
+        previousCount.value = newValue;
+        flip.value = false;
+      }, 400);
+    });
+
+    return {
+      flip,
+      previousCount,
+      currentCount,
+      twoDigits,
+    };
   },
 };
 </script>
 
 <style lang="scss" scoped>
+$flip-top-duration: 300ms;
+$flip-bottom-duration: 200ms;
+$b-radius: 12px;
+
 .tick-card {
   position: relative;
 
@@ -29,14 +73,14 @@ export default {
   height: 150px;
   width: 150px;
 
-  border-radius: 8px;
+  border-radius: $b-radius;
   background-color: $color-dark-desaturated-blue;
   margin: 0 1rem;
 
   perspective: 300px;
 
   &::before {
-    content: "42";
+    content: attr(data-current-count);
     box-sizing: border-box;
     position: absolute;
     left: 0;
@@ -54,7 +98,7 @@ export default {
     background-color: $color-dark-desaturated-blue;
     padding-top: 4px;
 
-    border-radius: 8px 8px 0px 0px;
+    border-radius: $b-radius $b-radius 0px 0px;
 
     transition-duration: 200ms;
 
@@ -70,12 +114,12 @@ export default {
     border-top: 1px solid $color-deep-dark-blue;
     background-color: $color-dark-desaturated-blue;
 
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 0px 0px $b-radius $b-radius;
 
     perspective: 300px;
 
     &::after {
-      content: "42";
+      content: attr(data-current-count);
       position: absolute;
       top: 0;
 
@@ -93,7 +137,7 @@ export default {
       transform-origin: top;
       background-color: $color-dark-desaturated-blue;
 
-      border-radius: 0px 0px 8px 8px;
+      border-radius: 0px 0px $b-radius $b-radius;
     }
 
     .tick-card-bottom-back {
@@ -104,7 +148,7 @@ export default {
       overflow: hidden;
 
       &::before {
-        content: "41";
+        content: attr(data-previous-count);
         display: block;
         position: absolute;
         width: 100%;
@@ -113,15 +157,17 @@ export default {
     }
   }
 
-  &:hover {
+  &.flip {
     .tick-card-top {
-      animation: flip-top 200ms cubic-bezier(0.37, 0.01, 0.94, 0.35);
+      animation: flip-top $flip-top-duration
+        cubic-bezier(0.37, 0.01, 0.94, 0.35);
       animation-fill-mode: forwards;
     }
     .tick-card-bottom::after {
-      animation: flip-bottom 100ms cubic-bezier(0.15, 0.45, 0.28, 1);
+      animation: flip-bottom $flip-bottom-duration
+        cubic-bezier(0.15, 0.45, 0.28, 1);
       animation-fill-mode: forwards;
-      animation-delay: 200ms;
+      animation-delay: $flip-top-duration;
     }
   }
 }
