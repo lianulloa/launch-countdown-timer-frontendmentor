@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html {
+  background-color: hsl(271deg 23% 18%);
+}
+
 body {
   color: $color-white;
   margin: 0;

@@ -29,6 +29,9 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-image: url("./assets/bg-stars.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .content {
   height: 70vh;
