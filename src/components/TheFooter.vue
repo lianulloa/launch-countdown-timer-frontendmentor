@@ -34,4 +34,10 @@ footer {
   align-items: center;
   display: flex;
 }
+
+@media (max-width: 730px) {
+  footer {
+    height: 130px;
+  }
+}
 </style>

@@ -265,7 +265,7 @@ $top-padding: 12px;
 }
 @media (max-width: 400px) and (max-height: 680px) {
   .tick-card {
-    transform: scale(0.4);
+    transform: scale(0.7);
   }
 }
 </style>
