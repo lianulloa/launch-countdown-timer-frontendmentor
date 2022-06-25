@@ -30,5 +30,6 @@ export default {
 .countdown-timer {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 </style>

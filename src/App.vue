@@ -38,4 +38,10 @@ export default {
   display: grid;
   grid-template-rows: 0.6fr 2fr;
 }
+
+@media (max-width: 560px), (max-height: 560px) {
+  .content {
+    margin-top: -80px;
+  }
+}
 </style>
