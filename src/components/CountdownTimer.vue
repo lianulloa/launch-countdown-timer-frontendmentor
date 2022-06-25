@@ -1,5 +1,5 @@
 <template>
-  <div class="countdown-timer text-uppercase text-weight-500">
+  <div class="countdown-timer text-uppercase text-weight-700">
     <tick-card caption="Days" :count="days" />
     <tick-card caption="Hours" :count="hours" />
     <tick-card caption="Minutes" :count="minutes" />

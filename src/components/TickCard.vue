@@ -75,7 +75,9 @@ $top-padding: 12px;
   width: 150px;
 
   border-radius: $b-radius;
+  color: $color-soft-red;
   background-color: $color-dark-desaturated-blue;
+  box-shadow: 0px 10px $color-deep-dark-blue;
   margin: 0 1rem;
 
   perspective: 300px;
@@ -170,6 +172,12 @@ $top-padding: 12px;
       animation-fill-mode: forwards;
       animation-delay: $flip-top-duration;
     }
+  }
+
+  small {
+    color: $color-grayish-blue;
+    display: block;
+    margin-top: 30px;
   }
 }
 
