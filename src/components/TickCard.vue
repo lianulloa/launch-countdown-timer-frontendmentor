@@ -64,6 +64,7 @@ export default {
 $flip-top-duration: 300ms;
 $flip-bottom-duration: 200ms;
 $b-radius: 12px;
+$top-padding: 12px;
 
 .tick-card {
   position: relative;
@@ -89,14 +90,14 @@ $b-radius: 12px;
     width: 100%;
 
     font-size: 6rem;
-    padding-top: 4px;
+    padding-top: $top-padding;
   }
 
   .tick-card-top {
     width: 100%;
     height: 50%;
     background-color: $color-dark-desaturated-blue;
-    padding-top: 4px;
+    padding-top: $top-padding;
 
     border-radius: $b-radius $b-radius 0px 0px;
 
@@ -126,7 +127,7 @@ $b-radius: 12px;
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      padding-bottom: 19px;
+      padding-bottom: 11px;
       box-sizing: border-box;
 
       height: 100%;
@@ -152,7 +153,7 @@ $b-radius: 12px;
         display: block;
         position: absolute;
         width: 100%;
-        top: calc(-100% + 2px);
+        top: calc(-100% + 10px);
       }
     }
   }
