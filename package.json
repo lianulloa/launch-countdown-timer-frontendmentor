@@ -2,6 +2,7 @@
   "name": "launch-countdown-timer-frontendmentor",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://lianulloa.github.io/launch-countdown-timer-frontendmentor/",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
