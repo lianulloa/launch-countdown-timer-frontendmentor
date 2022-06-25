@@ -257,4 +257,15 @@ $top-padding: 12px;
     transform: rotateX(0deg);
   }
 }
+
+@media (max-height: 500px) {
+  .tick-card {
+    transform: scale(0.5);
+  }
+}
+@media (max-width: 400px) and (max-height: 680px) {
+  .tick-card {
+    transform: scale(0.4);
+  }
+}
 </style>
