@@ -3,12 +3,17 @@
     :class="['tick-card', { flip }]"
     :data-current-count="twoDigits(currentCount)"
   >
-    <div class="tick-card-top">{{ twoDigits(previousCount) }}</div>
+    <div class="mid-holes mid-holes-top mid-holes-top-before" />
+    <div class="tick-card-top">
+      {{ twoDigits(previousCount) }}
+      <div class="mid-holes mid-holes-top" />
+    </div>
     <div class="tick-card-bottom" :data-current-count="twoDigits(currentCount)">
       <div
         class="tick-card-bottom-back"
         :data-previous-count="twoDigits(previousCount)"
       />
+      <div class="mid-holes" />
     </div>
     <small class="text-spaced" style="font-size: 1rem">
       {{ caption }}
@@ -160,17 +165,63 @@ $top-padding: 12px;
     }
   }
 
+  .mid-holes {
+    position: absolute;
+    height: 5px;
+    top: 0;
+    left: -2px;
+    right: -2px;
+    overflow: hidden;
+
+    &::before,
+    &::after {
+      content: " ";
+      display: block;
+      position: absolute;
+      border-radius: 100%;
+      width: 10px;
+      height: 10px;
+      background-color: $color-deep-dark-blue;
+      top: -5px;
+    }
+
+    &::before {
+      left: -3px;
+    }
+    &::after {
+      right: -3px;
+    }
+  }
+
+  .mid-holes-top {
+    top: unset;
+    bottom: 0;
+    &::before,
+    &::after {
+      top: 0;
+    }
+  }
+  .mid-holes-top-before {
+    top: calc(50% - 5px);
+    bottom: unset;
+  }
+
   &.flip {
     .tick-card-top {
       animation: flip-top $flip-top-duration
         cubic-bezier(0.37, 0.01, 0.94, 0.35);
       animation-fill-mode: forwards;
     }
-    .tick-card-bottom::after {
-      animation: flip-bottom $flip-bottom-duration
-        cubic-bezier(0.15, 0.45, 0.28, 1);
-      animation-fill-mode: forwards;
-      animation-delay: $flip-top-duration;
+    .tick-card-bottom {
+      .mid-holes {
+        z-index: 10;
+      }
+      &::after {
+        animation: flip-bottom $flip-bottom-duration
+          cubic-bezier(0.15, 0.45, 0.28, 1);
+        animation-fill-mode: forwards;
+        animation-delay: $flip-top-duration;
+      }
     }
   }
 

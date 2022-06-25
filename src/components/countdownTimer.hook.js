@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ref, computed } from "vue";
 
 function useTimer({ days = 14, hours = 0, minutes = 0, seconds = 0 } = {}) {
