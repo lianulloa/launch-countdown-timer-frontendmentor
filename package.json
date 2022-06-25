@@ -5,7 +5,7 @@
   "homepage": "https://lianulloa.github.io/launch-countdown-timer-frontendmentor/",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --dest docs",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
